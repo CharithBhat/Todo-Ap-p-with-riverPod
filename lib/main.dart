@@ -18,7 +18,7 @@ class MyApp extends ConsumerWidget {
 
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text('Example test')),
+        appBar: AppBar(title: Text('Example')),
         body: Center(
           child: Text(
             value,
