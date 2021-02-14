@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final helloWorldProvider = Provider((_) => 'Hello World');
+final counterProvider = StateProvider((ref) => 0);
 
 void main() {
   runApp(
@@ -14,16 +14,17 @@ void main() {
 class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final String value = watch(helloWorldProvider);
-
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text('Example')),
-        body: Center(
-          child: Text(
-            value,
-            style: TextStyle(fontSize: 30),
-          ),
+        appBar: AppBar(title: Text('Example. ok ok')),
+        body: Center(child: Consumer(builder: (context, watch, _) {
+          final count = watch(counterProvider).state;
+          return Text('$count');
+        })),
+        floatingActionButton: FloatingActionButton(
+          // The read method is an utility to read a provider without listening to it
+          onPressed: () => context.read(counterProvider).state++,
+          child: const Icon(Icons.add),
         ),
       ),
     );
